@@ -1,0 +1,289 @@
+﻿@import "~bootstrap/dist/css/bootstrap.min.css";
+
+$font-stack: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+$back-color: #343a40;
+$front-color: #00BFFF;
+
+$button-back: #00BFFF;
+$button-text: #343a40;
+$button-back-hover: #00BFFF;
+$button-text-hover: white;
+$button-back-active: #0080FF;
+$button-text-active: white;
+
+$circle-btn-back: #00BFFF;
+$circle-btn-back-hover: #0080FF;
+$circle-btn-back-active: white;
+
+
+@media screen and (min-width: 768px) {
+    .phone-book_add-wrapper {
+        margin-bottom: 15px;
+        background-color: $back-color;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .phone-book_add-dialog {
+        min-width: 270px;
+        margin-bottom: 2px;
+    }
+
+    .phone-book_header {
+        min-width: 270px;
+    }
+}
+
+
+.phone-book {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.phone-book_add-dialog {
+    padding: 8px;
+}
+
+.phone-book_header {
+    padding-left: 5px;
+}
+
+
+/*Таблица контактов: */
+
+.phone-book_table {
+    width: 100%;
+
+    tbody tr.checked-row {
+        td {
+            background-color: $front-color;
+        }
+
+        td.column-checkbox,
+        td.column-buttons {
+            background-color: $front-color;
+        }
+
+        .circle-button {
+            background-color: $back-color;
+
+            &:hover {
+                background-color: $circle-btn-back-hover;
+            }
+
+            &:active {
+                background-color: $circle-btn-back-active;
+            }
+        }
+    }
+
+    td {
+        &:nth-child(1) {
+            width: 30px;
+        }
+
+        &:nth-child(2) {
+            width: 150px;
+        }
+
+        &:nth-child(3) {
+            width: 150px;
+        }
+
+        &:nth-last-child(2) {
+            width: 20px;
+            min-width: 20px;
+        }
+
+        &:last-child {
+            width: 98px;
+            min-width: 98px;
+        }
+    }
+}
+
+[v-cloak] {
+    display: none;
+}
+
+
+/*Круглые кнопки*/
+
+.phone-book .circle-button {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    margin: 1px 5px;
+    cursor: pointer;
+    background-color: $circle-btn-back;
+    line-height: 15px;
+
+    &:hover {
+        background-color: $circle-btn-back-hover;
+    }
+
+    &:active {
+        background-color: $circle-btn-back-active;
+    }
+}
+
+
+/*Флажки*/
+
+.phone-book .checkbox {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: none;
+    vertical-align: middle;
+    margin: 1px 2px 1px 0;
+    padding: 0;
+}
+
+
+/*Большие нопки*/
+
+.modal,
+.phone-book {
+    .btn.button {
+        font-size: 16px;
+        display: inline-block;
+        width: 120px;
+        height: 30px;
+        border-radius: 15px;
+        border: none;
+        text-align: center;
+        line-height: 15px;
+        margin: 10px 3px;
+        cursor: pointer;
+        background-color: $button-back;
+        color: $button-text;
+        font-weight: bold;
+        padding: 5px;
+
+        &:hover {
+            background-color: $button-back-hover;
+            color: $button-text-hover;
+        }
+
+        &:active {
+            background-color: $button-back-active;
+            color: $button-text-active;
+        }
+    }
+}
+
+.phone-book .add-button {
+    margin-left: 0;
+}
+
+
+/*Поле ввода*/
+
+.form-group {
+    input[type="text"],
+    input[type="search"],
+    input[type="tel"] {
+        &.form-control {
+            height: 30px;
+            border-radius: 15px;
+            border: none;
+            padding: 5px 5px 5px 15px;
+            color: $back-color;
+            font-weight: bold;
+            outline: none;
+        }
+    }
+}
+
+
+/*Поисковое поле*/
+
+.phone-book {
+    .search-wrapper,
+    .search-input {
+        display: inline-block;
+        position: static;
+        height: 30px;
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        background-color: white;
+    }
+
+    .search-wrapper {
+        width: 230px;
+        margin: 10px 3px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+    .search-input {
+        width: 190px;
+        margin: 0;
+        padding: 5px 5px 5px 15px;
+        color: $back-color;
+        font-weight: bold;
+    }
+
+    .search-reset-button {
+        display: inline-block;
+        vertical-align: middle;
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        border: none;
+        margin: 6px 7px 8px 10px;
+        background-color: white;
+        color: white;
+        line-height: 13px;
+
+        &.visible-button {
+            cursor: pointer;
+            background-color: $circle-btn-back;
+
+            &:hover {
+                background-color: $circle-btn-back-hover;
+            }
+
+            &:active {
+                background-color: $circle-btn-back-active;
+            }
+        }
+    }
+}
+
+
+/*Модальные окна*/
+
+.phone-book .modal-dialog .modal-header {
+    background-color: $front-color;
+}
+
+
+/*Всплывающие уведомления*/
+
+#toastBoxPosition {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+#toastBox {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.toast {
+    min-width: 300px;
+
+    .toast-header {
+        background-color: $front-color;
+        color: white;
+    }
+}

@@ -8,14 +8,14 @@ module.exports = {
     entry: ["babel-polyfill", "./src/App.js"],
     output: {
         filename: "phone_book.js",
-        path: path.resolve("../", "public")
+        path: path.resolve("../", "_public")
     },
     devtool: "source-map",
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: "phone_book.css",
-            path: path.resolve("../", "public")
+            path: path.resolve("../", "_public")
         }),
         new VueLoaderPlugin()
     ],

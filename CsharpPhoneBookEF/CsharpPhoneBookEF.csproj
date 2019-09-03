@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -133,29 +139,36 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="BusinessLogic\MappingExpressions.cs" />
+    <Compile Include="Contracts\ContactDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\PhoneBookContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\icon-add.png" />
-    <Content Include="app\icon-close.png" />
-    <Content Include="app\icon-edit.png" />
-    <Content Include="app\package-lock.json" />
-    <Content Include="app\package.json" />
-    <Content Include="app\src\App.js" />
-    <Content Include="app\src\contactString.js" />
-    <Content Include="app\src\InputWithResetButton.vue" />
-    <Content Include="app\src\PhoneBook.scss" />
-    <Content Include="app\src\PhoneBook.vue" />
-    <Content Include="app\src\PhoneBookService.js" />
-    <Content Include="app\src\Toast.js" />
-    <Content Include="app\src\WindowForConfirmDialog.vue" />
-    <Content Include="app\src\WindowForEditContactDialog.vue" />
-    <Content Include="app\src\WindowForMessageDialog.vue" />
-    <Content Include="app\webpack.config.js" />
+    <Content Include="_app\icon-add.png" />
+    <Content Include="_app\icon-close.png" />
+    <Content Include="_app\icon-edit.png" />
+    <Content Include="_app\package-lock.json" />
+    <Content Include="_app\package.json" />
+    <Content Include="_app\src\App.js" />
+    <Content Include="_app\src\contactString.js" />
+    <Content Include="_app\src\InputWithResetButton.vue" />
+    <Content Include="_app\src\PhoneBook.scss" />
+    <Content Include="_app\src\PhoneBook.vue" />
+    <Content Include="_app\src\PhoneBookService.js" />
+    <Content Include="_app\src\Toast.js" />
+    <Content Include="_app\src\WindowForConfirmDialog.vue" />
+    <Content Include="_app\src\WindowForEditContactDialog.vue" />
+    <Content Include="_app\src\WindowForMessageDialog.vue" />
+    <Content Include="_app\webpack.config.js" />
+    <Content Include="Content\icon-add.png" />
+    <Content Include="Content\icon-close.png" />
+    <Content Include="Content\icon-edit.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
@@ -169,14 +182,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="public\" />
     <Folder Include="Scripts\" />
+    <Folder Include="_public\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

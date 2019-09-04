@@ -577,7 +577,7 @@ var ALL_CONTACTS_NOT_FOUND = 21;
       var _this = this;
 
       this.service.getContacts(filter).done(function (response) {
-        _this.contacts = response.contacts.map(function (contact) {
+        _this.contacts = response.map(function (contact) {
           contact.checked = false;
           return contact;
         });
@@ -36618,9 +36618,9 @@ Vue.compile = compileToFunctions;
 /***/ }),
 
 /***/ "./node_modules/webpack/buildin/global.js":
-/*!************************************************!*\
-  !*** ./node_modules/webpack/buildin/global.js ***!
-  \************************************************/
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -36865,7 +36865,7 @@ function () {
     key: "getContacts",
     value: function getContacts(searchTerm) {
       return jquery__WEBPACK_IMPORTED_MODULE_0___default.a.get({
-        url: "/getContacts?term=" + searchTerm,
+        url: "api/PhoneBook/getContacts?term=" + searchTerm,
         cache: false
       });
     }
@@ -36881,28 +36881,28 @@ function () {
   }, {
     key: "addContact",
     value: function addContact(contact) {
-      return this.post("/addContact", {
+      return this.post("api/PhoneBook/addContact", {
         request: contact
       });
     }
   }, {
     key: "editContact",
     value: function editContact(contact) {
-      return this.post("/editContact", {
+      return this.post("api/PhoneBook/editContact", {
         request: contact
       });
     }
   }, {
     key: "deleteContact",
     value: function deleteContact(id) {
-      return this.post("/deleteContact", {
+      return this.post("api/PhoneBook/deleteContact", {
         id: id
       });
     }
   }, {
     key: "deleteContacts",
     value: function deleteContacts(ids) {
-      return this.post("/deleteContacts", {
+      return this.post("api/PhoneBook/deleteContacts", {
         ids: ids
       });
     }

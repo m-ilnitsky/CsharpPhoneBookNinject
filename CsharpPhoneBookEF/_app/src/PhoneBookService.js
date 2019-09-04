@@ -3,7 +3,7 @@
 export default class PhoneBookService {
     getContacts(searchTerm) {
         return $.get({
-            url: "/getContacts?term=" + searchTerm,
+            url: "api/PhoneBook/getContacts?term=" + searchTerm,
             cache: false
         });
     }
@@ -17,18 +17,18 @@ export default class PhoneBookService {
     }
 
     addContact(contact) {
-        return this.post("/addContact", { request: contact });
+        return this.post("api/PhoneBook/addContact", { request: contact });
     }
 
     editContact(contact) {
-        return this.post("/editContact", { request: contact });
+        return this.post("api/PhoneBook/editContact", { request: contact });
     }
 
     deleteContact(id) {
-        return this.post("/deleteContact", { id: id });
+        return this.post("api/PhoneBook/deleteContact", { id: id });
     }
 
     deleteContacts(ids) {
-        return this.post("/deleteContacts", { ids: ids });
+        return this.post("api/PhoneBook/deleteContacts", { ids: ids });
     }
 }

@@ -9,18 +9,26 @@ namespace CsharpPhoneBookEF.BusinessLogic
 {
     public static class MappingExpressions
     {
-        public static Expression<Func<Contact, ContactDto>> MapContact
+        public static Contact ToModel(this ContactDto dto)
         {
-            get
+            return new Contact
             {
-                return e => new ContactDto
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    Family = e.Family,
-                    Phone = e.Phone
-                };
-            }
+                Id = dto.Id,
+                Name = dto.Name,
+                Family = dto.Family,
+                Phone = dto.Phone
+            };
+        }
+
+        public static ContactDto ToDto(this Contact c)
+        {
+            return new ContactDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Family = c.Family,
+                Phone = c.Phone
+            };
         }
     }
 }

@@ -18,7 +18,7 @@ namespace CsharpPhoneBookEF.Models
         {
             modelBuilder.Entity<Contact>().Property(c => c.Name).HasMaxLength(50);
             modelBuilder.Entity<Contact>().Property(c => c.Family).HasMaxLength(50);
-            modelBuilder.Entity<Contact>().Property(c => c.Phone).HasMaxLength(11);
+            modelBuilder.Entity<Contact>().Property(c => c.Phone).HasMaxLength(12);
 
             base.OnModelCreating(modelBuilder);
         }

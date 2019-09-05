@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CsharpPhoneBookEF.Models
 {
-    public class PhoneBookContext: DbContext
+    public class PhoneBookContext : DbContext
     {
         public DbSet<Contact> Contacts { get; set; }
 
@@ -16,9 +16,9 @@ namespace CsharpPhoneBookEF.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Contact>().Property(c => c.Name).HasMaxLength(50);
-            modelBuilder.Entity<Contact>().Property(c => c.Family).HasMaxLength(50);
-            modelBuilder.Entity<Contact>().Property(c => c.Phone).HasMaxLength(12);
+            modelBuilder.Entity<Contact>().Property(c => c.Name).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<Contact>().Property(c => c.Family).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<Contact>().Property(c => c.Phone).IsRequired().HasMaxLength(12);
 
             base.OnModelCreating(modelBuilder);
         }

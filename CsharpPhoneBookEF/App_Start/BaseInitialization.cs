@@ -42,25 +42,30 @@ namespace CsharpPhoneBookEF.App_Start
                 phoneBook.Contacts.Add(new Contact
                 {
                     Name = "Кецалькоатль",
+                    Family = "",
                     Phone = "88008008888"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
                     Name = "Ленин",
+                    Family = "",
                     Phone = "911"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
                     Name = "Сталин",
+                    Family = "",
                     Phone = "112"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
+                    Name = "",
                     Family = "Васечкин",
                     Phone = "3335501"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
+                    Name = "",
                     Family = "Петечкин",
                     Phone = "3335502"
                 });

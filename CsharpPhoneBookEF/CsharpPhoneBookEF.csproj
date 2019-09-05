@@ -139,6 +139,7 @@
     <Compile Include="Contracts\ContactDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhoneBookController.cs" />
+    <Compile Include="Controllers\ServerError.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -147,6 +148,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="_src\app\App.js" />
+    <Content Include="_src\app\contactString.js" />
+    <Content Include="_src\app\PhoneBookService.js" />
+    <Content Include="_src\app\Toast.js" />
+    <Content Include="_src\icon-add.png" />
+    <Content Include="_src\icon-close.png" />
+    <Content Include="_src\icon-edit.png" />
+    <Content Include="_src\webpack.config.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -154,22 +163,6 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="_app\icon-add.png" />
-    <Content Include="_app\icon-close.png" />
-    <Content Include="_app\icon-edit.png" />
-    <Content Include="_app\package-lock.json" />
-    <Content Include="_app\package.json" />
-    <Content Include="_app\src\App.js" />
-    <Content Include="_app\src\contactString.js" />
-    <Content Include="_app\src\InputWithResetButton.vue" />
-    <Content Include="_app\src\PhoneBook.scss" />
-    <Content Include="_app\src\PhoneBook.vue" />
-    <Content Include="_app\src\PhoneBookService.js" />
-    <Content Include="_app\src\Toast.js" />
-    <Content Include="_app\src\WindowForConfirmDialog.vue" />
-    <Content Include="_app\src\WindowForEditContactDialog.vue" />
-    <Content Include="_app\src\WindowForMessageDialog.vue" />
-    <Content Include="_app\webpack.config.js" />
     <Content Include="Content\icon-add.png" />
     <Content Include="Content\icon-close.png" />
     <Content Include="Content\icon-edit.png" />
@@ -187,6 +180,14 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="_src\package-lock.json" />
+    <Content Include="_src\package.json" />
+    <Content Include="_src\app\InputWithResetButton.vue" />
+    <Content Include="_src\app\PhoneBook.scss" />
+    <Content Include="_src\app\PhoneBook.vue" />
+    <Content Include="_src\app\WindowForConfirmDialog.vue" />
+    <Content Include="_src\app\WindowForEditContactDialog.vue" />
+    <Content Include="_src\app\WindowForMessageDialog.vue" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="_public\" />

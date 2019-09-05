@@ -18,11 +18,6 @@ namespace CsharpPhoneBookEF.Controllers
     {
         private readonly PhoneBookContext _db = new PhoneBookContext();
 
-        private static readonly int IS_PHONE_NUMBER = 1;
-        private static readonly int CONTACT_NOT_FOUND = 11;
-        private static readonly int ALL_CONTACTS_NOT_FOUND = 21;
-        private static readonly int MODEL_STATE_IS_INVALID = 31;
-
         // GET: api/PhoneBook/5
         public List<ContactDto> GetContacts(string term)
         {
@@ -39,12 +34,12 @@ namespace CsharpPhoneBookEF.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new { Success = false, ErrorCode = MODEL_STATE_IS_INVALID };
+                return new { Success = false, ErrorCode = ServerError.MODEL_STATE_IS_INVALID };
             }
 
             if (PhoneExists(contactDto.Phone))
             {
-                return new { Success = false, ErrorCode = IS_PHONE_NUMBER };
+                return new { Success = false, ErrorCode = ServerError.IS_PHONE_NUMBER };
             }
 
             _db.Contacts.Add(contactDto.ToModel());
@@ -59,14 +54,14 @@ namespace CsharpPhoneBookEF.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new { Success = false, ErrorCode = MODEL_STATE_IS_INVALID };
+                return new { Success = false, ErrorCode = ServerError.MODEL_STATE_IS_INVALID };
             }
 
             Contact contact = _db.Contacts.Find(contactDto.Id);
 
             if (contact == null)
             {
-                return new { Success = false, ErrorCode = CONTACT_NOT_FOUND };
+                return new { Success = false, ErrorCode = ServerError.CONTACT_NOT_FOUND };
             }
 
             _db.Entry(contact).State = EntityState.Modified;
@@ -87,7 +82,7 @@ namespace CsharpPhoneBookEF.Controllers
 
             if (contact == null)
             {
-                return new { Success = false, ErrorCode = CONTACT_NOT_FOUND };
+                return new { Success = false, ErrorCode = ServerError.CONTACT_NOT_FOUND };
             }
 
             _db.Contacts.Remove(contact);

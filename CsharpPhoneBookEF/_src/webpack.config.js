@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-    entry: ["babel-polyfill", "./src/App.js"],
+    entry: ["babel-polyfill", "./app/App.js"],
     output: {
         filename: "phone_book.js",
         path: path.resolve("../", "_public")

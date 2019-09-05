@@ -126,19 +126,19 @@
                                 <div class="circle-button add-button"
                                      title="Создать новый контакт на основе данного"
                                      @click="copyContact(contact)">
-                                    <img src="icon-add.png"
+                                    <img src="/../../_public/icon-add.png"
                                          alt="a">
                                 </div>
                                 <div class="circle-button edit-button"
                                      title="Изменить контакт"
                                      @click="editContact(contact)">
-                                    <img src="icon-edit.png"
+                                    <img src="/../../_public/icon-edit.png"
                                          alt="e">
                                 </div>
                                 <div class="circle-button delete-button"
                                      title="Удалить контакт"
                                      @click="confirmRemove(contact)">
-                                    <img src="icon-close.png"
+                                    <img src="/../../_public/icon-close.png"
                                          alt="x">
                                 </div>
                             </td>

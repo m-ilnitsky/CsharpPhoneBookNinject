@@ -13,7 +13,7 @@
         <div class="search-reset-button"
              :class="{'visible-button': isText}"
              @click="reset">
-            <img src="icon-close.png"
+            <img src="/../../_public/icon-close.png"
                  alt="x"
                  :title="buttonTitle">
         </div>

@@ -300,7 +300,7 @@
             loadContacts(filter) {
                 this.service.getContacts(filter)
                     .done(response => {
-                        this.contacts = response.contacts.map(contact => {
+                        this.contacts = response.map(contact => {
                             contact.checked = false;
                             return contact;
                         });

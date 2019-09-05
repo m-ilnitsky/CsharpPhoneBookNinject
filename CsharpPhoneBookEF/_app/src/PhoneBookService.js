@@ -17,18 +17,18 @@ export default class PhoneBookService {
     }
 
     addContact(contact) {
-        return this.post("api/PhoneBook/addContact", { request: contact });
+        return this.post("api/PhoneBook/addContact", contact);
     }
 
     editContact(contact) {
-        return this.post("api/PhoneBook/editContact", { request: contact });
+        return this.post("api/PhoneBook/editContact", contact);
     }
 
     deleteContact(id) {
-        return this.post("api/PhoneBook/deleteContact", { id: id });
+        return this.post("api/PhoneBook/deleteContact", id);
     }
 
     deleteContacts(ids) {
-        return this.post("api/PhoneBook/deleteContacts", { ids: ids });
+        return this.post("api/PhoneBook/deleteContacts", ids);
     }
 }

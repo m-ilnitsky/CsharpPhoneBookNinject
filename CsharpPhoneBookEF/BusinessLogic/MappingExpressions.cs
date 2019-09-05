@@ -30,5 +30,17 @@ namespace CsharpPhoneBookEF.BusinessLogic
                 Phone = c.Phone
             };
         }
+
+        public static List<ContactDto> ToDto(this List<Contact> contactList)
+        {
+            var dtoList = new List<ContactDto>();
+
+            foreach (var c in contactList)
+            {
+                dtoList.Add(c.ToDto());
+            }
+
+            return dtoList;
+        }
     }
 }

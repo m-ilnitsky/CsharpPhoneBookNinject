@@ -8,116 +8,111 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using CsharpPhoneBookEF.BusinessLogic;
+using CsharpPhoneBookEF.Contracts;
 using CsharpPhoneBookEF.Models;
 
 namespace CsharpPhoneBookEF.Controllers
 {
     public class PhoneBookController : ApiController
     {
-        private readonly PhoneBookContext db = new PhoneBookContext();
+        private readonly PhoneBookContext _db = new PhoneBookContext();
+
+        private static readonly int IS_PHONE_NUMBER = 1;
+        private static readonly int CONTACT_NOT_FOUND = 11;
+        private static readonly int ALL_CONTACTS_NOT_FOUND = 21;
+        private static readonly int MODEL_STATE_IS_INVALID = 31;
 
         // GET: api/PhoneBook/5
-        public Contact[] GetContacts(string term)
+        public List<ContactDto> GetContacts(string term)
         {
             if (string.IsNullOrEmpty(term))
             {
-                return db.Contacts.ToArray();
+                return _db.Contacts.ToList().ToDto();
             }
 
-            return db.Contacts.Where(c => (c.Name.Contains(term) || c.Family.Contains(term) || c.Phone.Contains(term))).ToArray();
+            return _db.Contacts.Where(c => (c.Name.Contains(term) || c.Family.Contains(term) || c.Phone.Contains(term))).ToList().ToDto();
         }
 
         [HttpPost]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult AddContact(Contact contact)
+        public Object AddContact([FromBody]ContactDto contactDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new { Success = false, ErrorCode = MODEL_STATE_IS_INVALID };
             }
 
-            if (PhoneExists(contact.Phone))
+            if (PhoneExists(contactDto.Phone))
             {
-                return BadRequest();
+                return new { Success = false, ErrorCode = IS_PHONE_NUMBER };
             }
 
-            db.Contacts.Add(contact);
+            _db.Contacts.Add(contactDto.ToModel());
 
+            _db.SaveChanges();
 
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = contact.Id }, contact);
+            return new { Success = true };
         }
 
         [HttpPost]
-        [ResponseType(typeof(void))]
-        public IHttpActionResult EditContact(int id, Contact contact)
+        public Object EditContact([FromBody]ContactDto contactDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return new { Success = false, ErrorCode = MODEL_STATE_IS_INVALID };
             }
 
-            if (id != contact.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(contact).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ContactExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        [HttpPost]
-        [ResponseType(typeof(Contact))]
-        public IHttpActionResult DeleteContact(int id)
-        {
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = _db.Contacts.Find(contactDto.Id);
 
             if (contact == null)
             {
-                return NotFound();
+                return new { Success = false, ErrorCode = CONTACT_NOT_FOUND };
             }
 
-            db.Contacts.Remove(contact);
-            db.SaveChanges();
+            _db.Entry(contact).State = EntityState.Modified;
 
-            return Ok(contact);
+            contact.Name = contactDto.Name;
+            contact.Family = contactDto.Family;
+            contact.Phone = contactDto.Phone;
+
+            _db.SaveChanges();
+
+            return new { Success = true };
+        }
+
+        [HttpPost]
+        public Object DeleteContact([FromBody]int id)
+        {
+            Contact contact = _db.Contacts.Find(id);
+
+            if (contact == null)
+            {
+                return new { Success = false, ErrorCode = CONTACT_NOT_FOUND };
+            }
+
+            _db.Contacts.Remove(contact);
+            _db.SaveChanges();
+
+            return new { Success = true };
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool ContactExists(int id)
         {
-            return db.Contacts.Count(c => c.Id == id) > 0;
+            return _db.Contacts.Count(c => c.Id == id) > 0;
         }
 
         private bool PhoneExists(string phone)
         {
-            return db.Contacts.Count(c => c.Phone == phone) > 0;
+            return _db.Contacts.Count(c => c.Phone == phone) > 0;
         }
     }
 }

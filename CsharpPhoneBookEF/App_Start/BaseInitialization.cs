@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using CsharpPhoneBookEF.Models;
 
 namespace CsharpPhoneBookEF.App_Start
@@ -37,13 +33,13 @@ namespace CsharpPhoneBookEF.App_Start
                 {
                     Name = "Юрий",
                     Family = "Юрьев",
-                    Phone = "+7812223344"
+                    Phone = "+78123334455"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
                     Name = "Кецалькоатль",
                     Family = "",
-                    Phone = "88008008888"
+                    Phone = "+78008008888"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
@@ -55,19 +51,25 @@ namespace CsharpPhoneBookEF.App_Start
                 {
                     Name = "Сталин",
                     Family = "",
-                    Phone = "112"
+                    Phone = "1122"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
                     Name = "",
                     Family = "Васечкин",
-                    Phone = "3335501"
+                    Phone = "3335577"
                 });
                 phoneBook.Contacts.Add(new Contact
                 {
                     Name = "",
                     Family = "Петечкин",
-                    Phone = "3335502"
+                    Phone = "333555"
+                });
+                phoneBook.Contacts.Add(new Contact
+                {
+                    Name = "",
+                    Family = "Атыбаев",
+                    Phone = "+37444555666"
                 });
 
                 phoneBook.SaveChanges();

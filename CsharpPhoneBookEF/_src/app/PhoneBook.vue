@@ -298,6 +298,7 @@
         },
         methods: {
             loadContacts(filter) {
+                filter = filter.trim();
                 this.service.getContacts(filter)
                     .done(response => {
                         this.contacts = response.map(contact => {

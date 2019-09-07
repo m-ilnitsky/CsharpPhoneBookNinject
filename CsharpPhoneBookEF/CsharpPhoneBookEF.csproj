@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BusinessLogic\MappingExpressions.cs" />
+    <Compile Include="BusinessLogic\PhoneFormatting.cs" />
     <Compile Include="Contracts\ContactDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhoneBookController.cs" />
@@ -143,8 +144,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Contact.cs" />
-    <Compile Include="Models\PhoneBookContext.cs" />
+    <Compile Include="Models\Repositories\BaseRepository.cs" />
+    <Compile Include="Models\Entities\Contact.cs" />
+    <Compile Include="Models\Repositories\ContactRepository.cs" />
+    <Compile Include="Models\Repositories\IContactRepository.cs" />
+    <Compile Include="Models\Repositories\IRepository.cs" />
+    <Compile Include="Models\UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="Models\Context\PhoneBookContext.cs" />
+    <Compile Include="Models\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

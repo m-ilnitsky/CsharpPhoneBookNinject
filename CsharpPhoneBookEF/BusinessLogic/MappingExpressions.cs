@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using CsharpPhoneBookEF.Contracts;
 using CsharpPhoneBookEF.Models;
 
@@ -16,7 +13,7 @@ namespace CsharpPhoneBookEF.BusinessLogic
                 Id = dto.Id,
                 Name = dto.Name,
                 Family = dto.Family,
-                Phone = dto.Phone
+                Phone = PhoneFormatting.SimplifyPhone(dto.Phone)
             };
         }
 
@@ -27,7 +24,7 @@ namespace CsharpPhoneBookEF.BusinessLogic
                 Id = c.Id,
                 Name = c.Name,
                 Family = c.Family,
-                Phone = c.Phone
+                Phone = PhoneFormatting.FormatPhone(c.Phone)
             };
         }
 

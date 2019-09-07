@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace CsharpPhoneBookEF.Controllers
+﻿namespace CsharpPhoneBookEF.Controllers
 {
     public enum ServerError
     {

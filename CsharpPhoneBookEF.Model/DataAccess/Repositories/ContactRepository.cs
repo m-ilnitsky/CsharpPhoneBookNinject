@@ -2,9 +2,10 @@
 using System.Data.Entity;
 using System.Linq;
 
-using CsharpPhoneBookEF.BusinessLogic;
+using CsharpPhoneBookEF.Model.Entities;
+using CsharpPhoneBookEF.Model.BusinessLogic;
 
-namespace CsharpPhoneBookEF.Models
+namespace CsharpPhoneBookEF.Model.Repositories
 {
     public class ContactRepository : BaseRepository<Contact>, IContactRepository
     {

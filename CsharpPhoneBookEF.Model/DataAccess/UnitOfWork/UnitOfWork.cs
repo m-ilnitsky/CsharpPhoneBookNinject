@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 
-namespace CsharpPhoneBookEF.Models
+namespace CsharpPhoneBookEF.Model.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.705
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpPhoneBookEF", "CsharpPhoneBookEF\CsharpPhoneBookEF.csproj", "{A4537A7E-5C26-420B-B95D-6B3C2D0C234D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpPhoneBookEF.Model", "CsharpPhoneBookEF.Model\CsharpPhoneBookEF.Model.csproj", "{5C3EDB8A-624E-4DA0-BB5C-71A033327506}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A4537A7E-5C26-420B-B95D-6B3C2D0C234D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4537A7E-5C26-420B-B95D-6B3C2D0C234D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4537A7E-5C26-420B-B95D-6B3C2D0C234D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3EDB8A-624E-4DA0-BB5C-71A033327506}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3EDB8A-624E-4DA0-BB5C-71A033327506}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3EDB8A-624E-4DA0-BB5C-71A033327506}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3EDB8A-624E-4DA0-BB5C-71A033327506}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

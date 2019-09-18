@@ -45,12 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -135,23 +129,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="BusinessLogic\MappingExpressions.cs" />
-    <Compile Include="BusinessLogic\PhoneFormatting.cs" />
-    <Compile Include="Contracts\ContactDto.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhoneBookController.cs" />
-    <Compile Include="Controllers\ServerError.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositories\BaseRepository.cs" />
-    <Compile Include="Models\Entities\Contact.cs" />
-    <Compile Include="Models\Repositories\ContactRepository.cs" />
-    <Compile Include="Models\Repositories\IContactRepository.cs" />
-    <Compile Include="Models\Repositories\IRepository.cs" />
-    <Compile Include="Models\UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="Models\Context\PhoneBookContext.cs" />
-    <Compile Include="Models\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +182,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsharpPhoneBookEF.Model\CsharpPhoneBookEF.Model.csproj">
+      <Project>{5c3edb8a-624e-4da0-bb5c-71a033327506}</Project>
+      <Name>CsharpPhoneBookEF.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

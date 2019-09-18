@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace CsharpPhoneBookEF.Models
+using CsharpPhoneBookEF.Model.Entities;
+
+namespace CsharpPhoneBookEF.Model.Repositories
 {
     public interface IContactRepository : IRepository<Contact>
     {

@@ -1,6 +1,6 @@
-﻿namespace CsharpPhoneBookEF.Contracts
+﻿namespace CsharpPhoneBookEF.Model.Entities
 {
-    public class ContactDto
+    public class Contact
     {
         public int Id { get; set; }
 

@@ -1,156 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using CsharpPhoneBookEF.BusinessLogic;
-using CsharpPhoneBookEF.Contracts;
-using CsharpPhoneBookEF.Models;
+
+using CsharpPhoneBookEF.Model.Dtos;
+using CsharpPhoneBookEF.Model.Handlers;
 
 namespace CsharpPhoneBookEF.Controllers
 {
     public class PhoneBookController : ApiController
     {
-        private readonly UnitOfWork _uow;
-        private readonly ContactRepository _contactRepository;
-
-        public PhoneBookController()
-        {
-            _uow = new UnitOfWork(new PhoneBookContext());
-            _contactRepository = (ContactRepository)_uow.GetRepository<IContactRepository>();
-        }
-
         // GET: api/PhoneBook/getContacts? term = +7913
         public List<ContactDto> GetContacts(string term)
         {
-            if (string.IsNullOrEmpty(term))
-            {
-                return _contactRepository.GetAll().ToDto();
-            }
-
-            return _contactRepository.GetAllWithString(term).ToDto();
+            return PhoneBookHandler.GetContacts(term);
         }
 
         [HttpPost]
-        public Object AddContact([FromBody]ContactDto contactDto)
+        public HttpResponse AddContact([FromBody]ContactDto contactDto)
         {
             if (!ModelState.IsValid)
             {
-                return new { Success = false, ErrorCode = ServerError.MODEL_STATE_IS_INVALID };
+                return GetResponseModelIsInvalid();
             }
 
-            if (_contactRepository.PhoneExists(contactDto.Phone))
-            {
-                return new
-                {
-                    Success = false,
-                    ErrorCode = ServerError.IS_PHONE_NUMBER,
-                    Message = "Такой номер уже имеется на сервере"
-                };
-            }
-
-            _contactRepository.Create(contactDto.ToModel());
-            _contactRepository.Save();
-
-            return new { Success = true };
+            return PhoneBookHandler.AddContact(contactDto);
         }
 
         [HttpPost]
-        public Object EditContact([FromBody]ContactDto contactDto)
+        public HttpResponse EditContact([FromBody]ContactDto contactDto)
         {
             if (!ModelState.IsValid)
             {
-                return new { Success = false, ErrorCode = ServerError.MODEL_STATE_IS_INVALID };
+                return GetResponseModelIsInvalid();
             }
 
-            Contact contact = _contactRepository.GetById(contactDto.Id);
-
-            if (contact == null)
-            {
-                return new
-                {
-                    Success = false,
-                    ErrorCode = ServerError.CONTACT_NOT_FOUND,
-                    Message = "Контакт не найден!"
-                };
-            }
-
-            var changedContact = contactDto.ToModel();
-
-            contact.Name = changedContact.Name;
-            contact.Family = changedContact.Family;
-            contact.Phone = changedContact.Phone;
-
-            _contactRepository.Update(contact);
-            _contactRepository.Save();
-
-            return new { Success = true };
+            return PhoneBookHandler.EditContact(contactDto);
         }
 
         [HttpPost]
-        public Object DeleteContact([FromBody]int id)
+        public HttpResponse DeleteContact([FromBody]int id)
         {
-            Contact contact = _contactRepository.GetById(id);
-
-            if (contact == null)
+            if (!ModelState.IsValid)
             {
-                return new
-                {
-                    Success = false,
-                    ErrorCode = ServerError.CONTACT_NOT_FOUND,
-                    Message = "Контакт не найден!"
-                };
+                return GetResponseModelIsInvalid();
             }
 
-            _contactRepository.Delete(contact);
-            _contactRepository.Save();
-
-            return new { Success = true };
+            return PhoneBookHandler.DeleteContact(id);
         }
 
         [HttpPost]
-        public Object DeleteContacts([FromBody]List<int> ids)
+        public HttpResponse DeleteContacts([FromBody]List<int> ids)
         {
-            var contacts = new List<Contact>();
-
-            foreach (var id in ids)
+            if (!ModelState.IsValid)
             {
-                var contact = _contactRepository.GetById(id);
-
-                if (contact != null)
-                {
-                    contacts.Add(contact);
-                }
-
+                return GetResponseModelIsInvalid();
             }
 
-            var oldCount = _contactRepository.GetCount();
-
-            if (contacts.Count == 0)
-            {
-                return new
-                {
-                    Success = false,
-                    ErrorCode = ServerError.ALL_CONTACTS_NOT_FOUND,
-                    DeleteCount = 0,
-                    Message = "Контакты не найдены!"
-                };
-            }
-
-            _contactRepository.Delete(contacts);
-            _contactRepository.Save();
-
-            var newCount = _contactRepository.GetCount();
-
-            return new { Success = true, DeleteCount = oldCount - newCount };
+            return PhoneBookHandler.DeleteContacts(ids);
         }
 
-        protected override void Dispose(bool disposing)
+        private HttpResponse GetResponseModelIsInvalid()
         {
-            if (disposing)
+            return new HttpResponse
             {
-                _uow.Dispose();
-            }
-
-            base.Dispose(disposing);
+                Success = false,
+                ErrorCode = ServerError.ModelStateIsInvalid,
+                DeleteCount = 0,
+                Message = "Неполадки на сервере!"
+            };
         }
     }
 }

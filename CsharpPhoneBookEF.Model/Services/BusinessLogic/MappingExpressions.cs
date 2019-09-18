@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using CsharpPhoneBookEF.Contracts;
-using CsharpPhoneBookEF.Models;
+using System.Linq;
+using CsharpPhoneBookEF.Model.Dtos;
+using CsharpPhoneBookEF.Model.Entities;
 
-namespace CsharpPhoneBookEF.BusinessLogic
+namespace CsharpPhoneBookEF.Model.BusinessLogic
 {
     public static class MappingExpressions
     {
@@ -30,14 +31,7 @@ namespace CsharpPhoneBookEF.BusinessLogic
 
         public static List<ContactDto> ToDto(this List<Contact> contactList)
         {
-            var dtoList = new List<ContactDto>();
-
-            foreach (var c in contactList)
-            {
-                dtoList.Add(c.ToDto());
-            }
-
-            return dtoList;
+            return contactList.Select(c => ToDto(c)).ToList();
         }
     }
 }

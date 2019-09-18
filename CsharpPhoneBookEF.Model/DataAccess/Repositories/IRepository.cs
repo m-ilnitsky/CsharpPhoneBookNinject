@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CsharpPhoneBookEF.Models
+namespace CsharpPhoneBookEF.Model.Repositories
 {
     public interface IRepository
     {

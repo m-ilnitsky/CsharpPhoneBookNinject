@@ -1,6 +1,8 @@
 ﻿using System.Data.Entity;
 
-namespace CsharpPhoneBookEF.Models
+using CsharpPhoneBookEF.Model.Entities;
+
+namespace CsharpPhoneBookEF.Model.Context
 {
     public class PhoneBookContext : DbContext
     {

@@ -1,4 +1,4 @@
-﻿namespace CsharpPhoneBookEF.BusinessLogic
+﻿namespace CsharpPhoneBookEF.Model.BusinessLogic
 {
     public class PhoneFormatting
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CsharpPhoneBookEF.Models
+namespace CsharpPhoneBookEF.Model.Repositories
 {
     public interface IUnitOfWork : IDisposable
     {

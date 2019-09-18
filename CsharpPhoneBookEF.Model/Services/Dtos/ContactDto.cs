@@ -1,6 +1,6 @@
-﻿namespace CsharpPhoneBookEF.Models
+﻿namespace CsharpPhoneBookEF.Model.Dtos
 {
-    public class Contact
+    public class ContactDto
     {
         public int Id { get; set; }
 

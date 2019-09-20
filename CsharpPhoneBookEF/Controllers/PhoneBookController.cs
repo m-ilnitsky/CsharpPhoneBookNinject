@@ -15,58 +15,27 @@ namespace CsharpPhoneBookEF.Controllers
         }
 
         [HttpPost]
-        public HttpResponse AddContact([FromBody]ContactDto contactDto)
+        public BaseResponse AddContact(ContactDto contactDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return GetResponseModelIsInvalid();
-            }
-
             return PhoneBookHandler.AddContact(contactDto);
         }
 
         [HttpPost]
-        public HttpResponse EditContact([FromBody]ContactDto contactDto)
+        public BaseResponse EditContact(ContactDto contactDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return GetResponseModelIsInvalid();
-            }
-
             return PhoneBookHandler.EditContact(contactDto);
         }
 
         [HttpPost]
-        public HttpResponse DeleteContact([FromBody]int id)
+        public BaseResponse DeleteContact([FromBody]int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return GetResponseModelIsInvalid();
-            }
-
             return PhoneBookHandler.DeleteContact(id);
         }
 
         [HttpPost]
-        public HttpResponse DeleteContacts([FromBody]List<int> ids)
+        public BaseResponse DeleteContacts(List<int> ids)
         {
-            if (!ModelState.IsValid)
-            {
-                return GetResponseModelIsInvalid();
-            }
-
             return PhoneBookHandler.DeleteContacts(ids);
-        }
-
-        private HttpResponse GetResponseModelIsInvalid()
-        {
-            return new HttpResponse
-            {
-                Success = false,
-                ErrorCode = ServerError.ModelStateIsInvalid,
-                DeleteCount = 0,
-                Message = "Неполадки на сервере!"
-            };
         }
     }
 }

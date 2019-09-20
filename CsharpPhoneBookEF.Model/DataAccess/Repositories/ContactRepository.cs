@@ -17,13 +17,13 @@ namespace CsharpPhoneBookEF.Model.Repositories
         {
             s = s.ToLower();
             var phone = PhoneFormatting.SimplifyPhone(s);
-            return _dbSet.Where(c => (c.Name.ToLower().Contains(s) || c.Family.ToLower().Contains(s) || c.Phone.Contains(phone))).ToList();
+            return _dbSet.Where(c => (c.Name.Contains(s) || c.Family.Contains(s) || c.Phone.Contains(phone))).ToList();
         }
 
         public bool PhoneExists(string s)
         {
             var phone = PhoneFormatting.SimplifyPhone(s);
-            return _dbSet.Count(c => c.Phone == phone) > 0;
+            return _dbSet.Any(c => c.Phone == phone);
         }
     }
 }

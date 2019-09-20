@@ -1,4 +1,4 @@
-﻿namespace CsharpPhoneBookEF.Model.Handlers
+﻿namespace CsharpPhoneBookEF.Model.Dtos
 {
     public enum ServerError
     {

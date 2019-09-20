@@ -1,6 +1,6 @@
-﻿namespace CsharpPhoneBookEF.Model.Handlers
+﻿namespace CsharpPhoneBookEF.Model.Dtos
 {
-    public class HttpResponse
+    public class BaseResponse
     {
         public bool Success { get; set; }
 

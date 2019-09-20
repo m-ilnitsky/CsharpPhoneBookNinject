@@ -25,7 +25,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
             }
         }
 
-        public static HttpResponse AddContact(ContactDto contactDto)
+        public static BaseResponse AddContact(ContactDto contactDto)
         {
             using (var uow = new UnitOfWork(new PhoneBookContext()))
             {
@@ -33,7 +33,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
                 if (contactRepository.PhoneExists(contactDto.Phone))
                 {
-                    return new HttpResponse
+                    return new BaseResponse
                     {
                         Success = false,
                         ErrorCode = ServerError.IsPhoneNumber,
@@ -44,11 +44,11 @@ namespace CsharpPhoneBookEF.Model.Handlers
                 contactRepository.Create(contactDto.ToModel());
                 contactRepository.Save();
 
-                return new HttpResponse { Success = true };
+                return new BaseResponse { Success = true };
             }
         }
 
-        public static HttpResponse EditContact(ContactDto contactDto)
+        public static BaseResponse EditContact(ContactDto contactDto)
         {
             using (var uow = new UnitOfWork(new PhoneBookContext()))
             {
@@ -58,7 +58,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
                 if (contact == null)
                 {
-                    return new HttpResponse
+                    return new BaseResponse
                     {
                         Success = false,
                         ErrorCode = ServerError.ContactNotFound,
@@ -75,11 +75,11 @@ namespace CsharpPhoneBookEF.Model.Handlers
                 contactRepository.Update(contact);
                 contactRepository.Save();
 
-                return new HttpResponse { Success = true };
+                return new BaseResponse { Success = true };
             }
         }
 
-        public static HttpResponse DeleteContact(int id)
+        public static BaseResponse DeleteContact(int id)
         {
             using (var uow = new UnitOfWork(new PhoneBookContext()))
             {
@@ -89,7 +89,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
                 if (contact == null)
                 {
-                    return new HttpResponse
+                    return new BaseResponse
                     {
                         Success = false,
                         ErrorCode = ServerError.ContactNotFound,
@@ -100,11 +100,11 @@ namespace CsharpPhoneBookEF.Model.Handlers
                 contactRepository.Delete(contact);
                 contactRepository.Save();
 
-                return new HttpResponse { Success = true };
+                return new BaseResponse { Success = true };
             }
         }
 
-        public static HttpResponse DeleteContacts(List<int> ids)
+        public static BaseResponse DeleteContacts(List<int> ids)
         {
             using (var uow = new UnitOfWork(new PhoneBookContext()))
             {
@@ -127,7 +127,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
                 if (contacts.Count == 0)
                 {
-                    return new HttpResponse
+                    return new BaseResponse
                     {
                         Success = false,
                         ErrorCode = ServerError.AllContactsNotFound,
@@ -141,7 +141,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
                 var newCount = contactRepository.GetCount();
 
-                return new HttpResponse { Success = true, DeleteCount = oldCount - newCount };
+                return new BaseResponse { Success = true, DeleteCount = oldCount - newCount };
             }
         }
     }

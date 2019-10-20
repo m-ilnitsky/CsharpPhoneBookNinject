@@ -8,34 +8,41 @@ namespace CsharpPhoneBookEF.Controllers
 {
     public class PhoneBookController : ApiController
     {
+        private IPhoneBookHandler _phoneBookHandler;
+
+        public PhoneBookController(IPhoneBookHandler phoneBookHandler)
+        {
+            _phoneBookHandler = phoneBookHandler;
+        }
+
         // GET: api/PhoneBook/getContacts? term = +7913
         public List<ContactDto> GetContacts(string term)
         {
-            return PhoneBookHandler.GetContacts(term);
+            return _phoneBookHandler.GetContacts(term);
         }
 
         [HttpPost]
         public BaseResponse AddContact(ContactDto contactDto)
         {
-            return PhoneBookHandler.AddContact(contactDto);
+            return _phoneBookHandler.AddContact(contactDto);
         }
 
         [HttpPost]
         public BaseResponse EditContact(ContactDto contactDto)
         {
-            return PhoneBookHandler.EditContact(contactDto);
+            return _phoneBookHandler.EditContact(contactDto);
         }
 
         [HttpPost]
         public BaseResponse DeleteContact([FromBody]int id)
         {
-            return PhoneBookHandler.DeleteContact(id);
+            return _phoneBookHandler.DeleteContact(id);
         }
 
         [HttpPost]
         public BaseResponse DeleteContacts(List<int> ids)
         {
-            return PhoneBookHandler.DeleteContacts(ids);
+            return _phoneBookHandler.DeleteContacts(ids);
         }
     }
 }

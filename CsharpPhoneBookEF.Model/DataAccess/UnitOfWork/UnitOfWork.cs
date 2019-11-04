@@ -9,7 +9,7 @@ namespace CsharpPhoneBookEF.Model.Repositories
 
         public UnitOfWork(DbContext dbContext)
         {
-            _db = dbContext;
+            _db = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
         public void Save()

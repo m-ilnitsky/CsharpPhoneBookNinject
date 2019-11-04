@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using CsharpPhoneBookEF.Model.BusinessLogic;
 using CsharpPhoneBookEF.Model.Dtos;
 using CsharpPhoneBookEF.Model.Entities;
 using CsharpPhoneBookEF.Model.Repositories;
-using System;
 
 namespace CsharpPhoneBookEF.Model.Handlers
 {
@@ -16,7 +16,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
         public PhoneBookHandler(IUnitOfWork unitOfWork)
         {
-            _uow = unitOfWork;
+            _uow = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
         public void Dispose()
@@ -42,7 +42,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
         {
             CheckDisposed();
 
-            var contactRepository = (ContactRepository)_uow.GetRepository<IContactRepository>();
+            var contactRepository = _uow.GetRepository<IContactRepository>();
 
             if (string.IsNullOrEmpty(term))
             {
@@ -56,7 +56,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
         {
             CheckDisposed();
 
-            var contactRepository = (ContactRepository)_uow.GetRepository<IContactRepository>();
+            var contactRepository = _uow.GetRepository<IContactRepository>();
 
             if (contactRepository.PhoneExists(contactDto.Phone))
             {
@@ -69,7 +69,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
             }
 
             contactRepository.Create(contactDto.ToModel());
-            contactRepository.Save();
+            _uow.Save();
 
             return new BaseResponse { Success = true };
         }
@@ -78,9 +78,9 @@ namespace CsharpPhoneBookEF.Model.Handlers
         {
             CheckDisposed();
 
-            var contactRepository = (ContactRepository)_uow.GetRepository<IContactRepository>();
+            var contactRepository = _uow.GetRepository<IContactRepository>();
 
-            Contact contact = contactRepository.GetById(contactDto.Id);
+            var contact = contactRepository.GetById(contactDto.Id);
 
             if (contact == null)
             {
@@ -99,7 +99,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
             contact.Phone = changedContact.Phone;
 
             contactRepository.Update(contact);
-            contactRepository.Save();
+            _uow.Save();
 
             return new BaseResponse { Success = true };
         }
@@ -108,9 +108,9 @@ namespace CsharpPhoneBookEF.Model.Handlers
         {
             CheckDisposed();
 
-            var contactRepository = (ContactRepository)_uow.GetRepository<IContactRepository>();
+            var contactRepository = _uow.GetRepository<IContactRepository>();
 
-            Contact contact = contactRepository.GetById(id);
+            var contact = contactRepository.GetById(id);
 
             if (contact == null)
             {
@@ -123,7 +123,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
             }
 
             contactRepository.Delete(contact);
-            contactRepository.Save();
+            _uow.Save();
 
             return new BaseResponse { Success = true };
         }
@@ -132,7 +132,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
         {
             CheckDisposed();
 
-            var contactRepository = (ContactRepository)_uow.GetRepository<IContactRepository>();
+            var contactRepository = _uow.GetRepository<IContactRepository>();
 
             var contacts = new List<Contact>();
 
@@ -144,7 +144,6 @@ namespace CsharpPhoneBookEF.Model.Handlers
                 {
                     contacts.Add(contact);
                 }
-
             }
 
             var oldCount = contactRepository.GetCount();
@@ -161,7 +160,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
             }
 
             contactRepository.Delete(contacts);
-            contactRepository.Save();
+            _uow.Save();
 
             var newCount = contactRepository.GetCount();
 

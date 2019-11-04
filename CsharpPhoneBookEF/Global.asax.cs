@@ -2,8 +2,9 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using CsharpPhoneBookEF.App_Start;
 using Newtonsoft.Json.Serialization;
+
+using CsharpPhoneBookEF.App_Start;
 
 namespace CsharpPhoneBookEF
 {

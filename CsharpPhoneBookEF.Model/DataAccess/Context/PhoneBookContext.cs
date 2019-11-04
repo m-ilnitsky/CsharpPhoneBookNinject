@@ -10,6 +10,7 @@ namespace CsharpPhoneBookEF.Model.Context
 
         public PhoneBookContext() : base("IlnitskyPhoneBookConnection")
         {
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<PhoneBookContext>());
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

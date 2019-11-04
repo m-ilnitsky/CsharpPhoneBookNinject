@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 
@@ -6,18 +7,13 @@ namespace CsharpPhoneBookEF.Model.Repositories
 {
     public class BaseRepository<T> : IRepository<T> where T : class
     {
-        protected DbContext _db;
-        protected DbSet<T> _dbSet;
+        protected readonly DbContext _db;
+        protected readonly DbSet<T> _dbSet;
 
         public BaseRepository(DbContext dbContext)
         {
-            _db = dbContext;
+            _db = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
             _dbSet = dbContext.Set<T>();
-        }
-
-        public virtual void Save()
-        {
-            _db.SaveChanges();
         }
 
         public virtual void Delete(T entity)

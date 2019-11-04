@@ -44,8 +44,6 @@ namespace CsharpPhoneBookEF.App_Start
 
         private static void RegisterServices(IKernel kernel)
         {
-            //kernel.Bind<IRepo>().ToMethod(ctx => new Repo("Ninject Rocks!"));
-
             kernel.Bind<DbContext>().ToMethod(ctx => new PhoneBookContext());
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             kernel.Bind<IPhoneBookHandler>().To<PhoneBookHandler>();

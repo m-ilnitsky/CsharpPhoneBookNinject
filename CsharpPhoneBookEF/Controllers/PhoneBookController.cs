@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System;
 
 using CsharpPhoneBookEF.Model.Dtos;
 using CsharpPhoneBookEF.Model.Handlers;
@@ -8,11 +9,11 @@ namespace CsharpPhoneBookEF.Controllers
 {
     public class PhoneBookController : ApiController
     {
-        private IPhoneBookHandler _phoneBookHandler;
+        private readonly IPhoneBookHandler _phoneBookHandler;
 
         public PhoneBookController(IPhoneBookHandler phoneBookHandler)
         {
-            _phoneBookHandler = phoneBookHandler;
+            _phoneBookHandler = phoneBookHandler ?? throw new ArgumentNullException(nameof(phoneBookHandler));
         }
 
         // GET: api/PhoneBook/getContacts? term = +7913

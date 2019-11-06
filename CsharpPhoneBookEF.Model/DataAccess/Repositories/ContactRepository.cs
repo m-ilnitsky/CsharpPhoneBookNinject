@@ -4,6 +4,7 @@ using System.Linq;
 
 using CsharpPhoneBookEF.Model.Entities;
 using CsharpPhoneBookEF.Model.BusinessLogic;
+using System.Data.Entity.Infrastructure;
 
 namespace CsharpPhoneBookEF.Model.Repositories
 {
@@ -24,6 +25,57 @@ namespace CsharpPhoneBookEF.Model.Repositories
         {
             var phone = PhoneFormatting.SimplifyPhone(s);
             return _dbSet.Any(c => c.Phone == phone);
+        }
+
+        public virtual bool DeleteById(int id)
+        {
+            var contact = new Contact
+            {
+                Id = id
+            };
+
+            try
+            {
+                _dbSet.Attach(contact);
+                _dbSet.Remove(contact);
+                _db.SaveChanges();
+
+                return true;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Контакт удалён ранее
+                return false;
+            }
+        }
+
+        public virtual int DeleteById(IEnumerable<int> ids)
+        {
+            var contacts = new List<Contact>();
+
+            try
+            {
+                foreach (var id in ids)
+                {
+                    var contact = new Contact
+                    {
+                        Id = id
+                    };
+
+                    _dbSet.Attach(contact);
+                    contacts.Add(contact);
+                }
+
+                _dbSet.RemoveRange(contacts);
+                _db.SaveChanges();
+
+                return contacts.Count;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                // Один или несколько контактов были удалены ранее
+                return 0;
+            }
         }
     }
 }

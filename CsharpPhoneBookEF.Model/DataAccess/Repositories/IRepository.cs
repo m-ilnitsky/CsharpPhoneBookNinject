@@ -11,7 +11,7 @@ namespace CsharpPhoneBookEF.Model.Repositories
         void Create(T entity);
         void Update(T entity);
         void Delete(T entity);
-        void Delete(List<T> entities);
+        void Delete(IEnumerable<T> entities);
         List<T> GetAll();
         T GetById(int id);
         int GetCount();

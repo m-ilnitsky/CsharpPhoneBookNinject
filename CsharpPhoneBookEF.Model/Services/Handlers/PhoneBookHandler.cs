@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using CsharpPhoneBookEF.Model.BusinessLogic;
 using CsharpPhoneBookEF.Model.Dtos;
-using CsharpPhoneBookEF.Model.Entities;
 using CsharpPhoneBookEF.Model.Repositories;
 
 namespace CsharpPhoneBookEF.Model.Handlers
@@ -110,9 +109,9 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
             var contactRepository = _uow.GetRepository<IContactRepository>();
 
-            var contact = contactRepository.GetById(id);
+            var success = contactRepository.DeleteById(id);
 
-            if (contact == null)
+            if (!success)
             {
                 return new BaseResponse
                 {
@@ -121,9 +120,6 @@ namespace CsharpPhoneBookEF.Model.Handlers
                     Message = "Контакт не найден!"
                 };
             }
-
-            contactRepository.Delete(contact);
-            _uow.Save();
 
             return new BaseResponse { Success = true };
         }
@@ -134,21 +130,9 @@ namespace CsharpPhoneBookEF.Model.Handlers
 
             var contactRepository = _uow.GetRepository<IContactRepository>();
 
-            var contacts = new List<Contact>();
+            var deletedContactsCount = contactRepository.DeleteById(ids);
 
-            foreach (var id in ids)
-            {
-                var contact = contactRepository.GetById(id);
-
-                if (contact != null)
-                {
-                    contacts.Add(contact);
-                }
-            }
-
-            var oldCount = contactRepository.GetCount();
-
-            if (contacts.Count == 0)
+            if (deletedContactsCount == 0)
             {
                 return new BaseResponse
                 {
@@ -159,12 +143,7 @@ namespace CsharpPhoneBookEF.Model.Handlers
                 };
             }
 
-            contactRepository.Delete(contacts);
-            _uow.Save();
-
-            var newCount = contactRepository.GetCount();
-
-            return new BaseResponse { Success = true, DeleteCount = oldCount - newCount };
+            return new BaseResponse { Success = true, DeleteCount = deletedContactsCount };
         }
     }
 }

@@ -8,5 +8,7 @@ namespace CsharpPhoneBookEF.Model.Repositories
     {
         List<Contact> GetAllWithString(string s);
         bool PhoneExists(string s);
+        bool DeleteById(int id);
+        int DeleteById(IEnumerable<int> ids);
     }
 }

@@ -26,7 +26,7 @@ namespace CsharpPhoneBookEF.Model.Repositories
             _dbSet.Remove(entity);
         }
 
-        public virtual void Delete(List<T> entities)
+        public virtual void Delete(IEnumerable<T> entities)
         {
             foreach (var e in entities)
             {
